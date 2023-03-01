@@ -111,6 +111,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     if (_formKey.currentState!.validate()) {
       // TODO: Authenticate user with email and password
       print('Login successful');
+      Navigator.pop(context);
     }
   }
 

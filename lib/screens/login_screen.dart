@@ -80,11 +80,12 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 SizedBox(height: 20.0),
                 PrimaryTextButton(onPressed: () {
-
+                  Navigator.of(context).pushNamed(MOBILE_VERIFICATION_SCREEN);
                 }, buttonText: "forgot password",textStyle: primaryTextStyles['14_normal'],),
                 PrimaryTextButton(onPressed: () {
                   Navigator.of(context).pushNamed(SIGNUP_SCREEN);
                 }, buttonText: "Doesn't Have Account? sign up",textStyle: primaryTextStyles['14_normal'],),
+
               ],
             ),
           ),
