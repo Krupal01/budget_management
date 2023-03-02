@@ -16,7 +16,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
       elevation: 0,
       leading: leading,
       centerTitle: true,
-      title: Text(title ,  style: primaryTextStyles['24_bold'],),
+      title: Text(title ,  style: primaryTextStyles['20_bold'],),
       actions: actions,
     );
   }

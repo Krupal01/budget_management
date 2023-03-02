@@ -98,6 +98,7 @@ class _LoginScreenState extends State<LoginScreen> {
     if (_formKey.currentState!.validate()) {
       // TODO: Authenticate user with email and password
       print('Login successful');
+      Navigator.of(context).pushReplacementNamed(DASHBOARD_SCREEN);
     }
   }
 
