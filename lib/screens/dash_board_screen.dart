@@ -34,7 +34,7 @@ class DashboardScreen extends StatelessWidget {
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
                 itemBuilder: (context, index) => PersonCard(
-                  number: index,
+                  number: -200,
                   name: 'Person Name',
                   redNumber: -10,
                   greenNumber: 10,

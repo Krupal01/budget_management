@@ -1,16 +1,16 @@
-import 'package:budget_management/utils/styles.dart';
 import 'package:flutter/material.dart';
 
-class PersonCard extends StatelessWidget {
-  final double number;
-  final String name;
-  final double? redNumber;
-  final double? greenNumber;
+import '../utils/styles.dart';
+
+class TransactionCard extends StatelessWidget {
+
+  final double price;
+  final String reason;
+  final int dateInMillis;
   final VoidCallback? onTap;
   final VoidCallback? onLongPress;
 
-  PersonCard(
-      {required this.number, required this.name, this.redNumber, this.greenNumber , this.onTap , this.onLongPress});
+  const TransactionCard({Key? key , required this.price, required this.reason, required this.dateInMillis , this.onTap , this.onLongPress}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -39,9 +39,9 @@ class PersonCard extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.all(5.0),
                       child: Text(
-                        number.toStringAsFixed(2),
+                        price.toStringAsFixed(2),
                         style: TextStyle(
-                          color: number < 0 ? Colors.red : Colors.green,
+                          color: price < 0 ? Colors.red : Colors.green,
                           fontSize: 20.0,
                         ),
                       ),
@@ -56,35 +56,13 @@ class PersonCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      name,
+                      reason,
                       style: blackTextStyles['18_normal'],
                     ),
                     SizedBox(height: 5.0),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        if (greenNumber != null)
-                          Text(
-                            greenNumber!.toStringAsFixed(2),
-                            style: TextStyle(
-                              color: Colors.green,
-                              fontSize: 16.0,
-                            ),
-                          ),
-                        if (greenNumber != null && redNumber != null)
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                            child: Text('/' , style: blackTextStyles['18_normal'],),
-                          ),
-                        if (redNumber != null)
-                          Text(
-                            redNumber!.toStringAsFixed(2),
-                            style: TextStyle(
-                              color: Colors.red,
-                              fontSize: 16.0,
-                            ),
-                          ),
-                      ],
+                    Text(
+                      DateTime.fromMillisecondsSinceEpoch(dateInMillis).toString(),
+                      style: TextStyle(fontSize: 12 , color: Colors.grey),
                     ),
                   ],
                 ),
