@@ -22,8 +22,8 @@ class DashboardScreen extends StatelessWidget {
             children: [
               SizedBox(
                 child: MainDashboardCard(
-                  title: "20",
-                  description: "20jbhjhj",
+                  title: (1000).toStringAsFixed(2),
+                  description: "Total Expanses",
                   onTap: () => Navigator.of(context).pushNamed(PROFILE_SCREEN),
                 ),
                 height: 150,

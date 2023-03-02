@@ -1,4 +1,5 @@
 import 'package:budget_management/screens/dash_board_screen.dart';
+import 'package:budget_management/screens/expenses_list_screen.dart';
 import 'package:budget_management/screens/forgot_password_screen.dart';
 import 'package:budget_management/screens/login_screen.dart';
 import 'package:budget_management/screens/mobile_verification_screen.dart';
@@ -23,6 +24,7 @@ class Routes{
       case DASHBOARD_SCREEN : return MaterialPageRoute(builder: (context) => DashboardScreen(),);
       case PROFILE_SCREEN : return MaterialPageRoute(builder: (context) => ProfileScreen(),);
       case PERSON_DETAIL_SCREEN : return MaterialPageRoute(builder: (context) => PersonDetailScreen(),);
+      case EXPENSES_LIST_SCREEN : return MaterialPageRoute(builder: (context) => ExpensesListScreen(),);
     }
     return null;
   }
