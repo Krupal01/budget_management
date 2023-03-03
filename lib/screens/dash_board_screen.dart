@@ -50,11 +50,15 @@ class DashboardScreen extends StatelessWidget {
         children: [
           ActionButton(
             icon: Icon(Icons.add_comment_rounded),
-            onPressed: () {},
+            onPressed: () {
+
+            },
           ),
           ActionButton(
             icon: Icon(Icons.add_reaction),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pushNamed(ADD_PERSON_SCREEN);
+            },
           ),
         ],
       ),
