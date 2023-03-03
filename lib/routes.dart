@@ -1,4 +1,5 @@
 import 'package:budget_management/screens/add_person_screen.dart';
+import 'package:budget_management/screens/add_transaction_screen.dart';
 import 'package:budget_management/screens/dash_board_screen.dart';
 import 'package:budget_management/screens/expenses_list_screen.dart';
 import 'package:budget_management/screens/forgot_password_screen.dart';
@@ -27,6 +28,7 @@ class Routes{
       case PERSON_DETAIL_SCREEN : return MaterialPageRoute(builder: (context) => PersonDetailScreen(),);
       case EXPENSES_LIST_SCREEN : return MaterialPageRoute(builder: (context) => ExpensesListScreen(),);
       case ADD_PERSON_SCREEN : return MaterialPageRoute(builder: (context) => AddPersonScreen(),);
+      case ADD_TRANSACTION_SCREEN : return MaterialPageRoute(builder: (context) => AddTransactionScreen(),);
     }
     return null;
   }

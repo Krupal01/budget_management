@@ -51,7 +51,7 @@ class DashboardScreen extends StatelessWidget {
           ActionButton(
             icon: Icon(Icons.add_comment_rounded),
             onPressed: () {
-
+              Navigator.of(context).pushNamed(ADD_TRANSACTION_SCREEN);
             },
           ),
           ActionButton(
