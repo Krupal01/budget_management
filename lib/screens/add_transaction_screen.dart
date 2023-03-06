@@ -2,6 +2,7 @@ import 'package:budget_management/utils/constants.dart';
 import 'package:budget_management/widget/RoundedPrimaryButton.dart';
 import 'package:budget_management/widget/back_icon_button.dart';
 import 'package:budget_management/widget/main_app_bar.dart';
+import 'package:dropdown_plus/dropdown_plus.dart';
 import 'package:flutter/material.dart';
 
 import '../widget/checkbox_list.dart';
@@ -13,18 +14,19 @@ class AddTransactionScreen extends StatefulWidget {
 
 class _AddTransactionScreenState extends State<AddTransactionScreen> {
   final _formKey = GlobalKey<FormState>();
+  String? _payee, _reason;
   double? _price;
   DateTime? _selectedDate;
   List<String> _selectedPerson = [];
   bool? _isAnyChecked = null;
 
+  final TextEditingController iconController = TextEditingController();
+
   void _submitForm() {
     final isValid = _formKey.currentState!.validate();
-    if(!isValid || !(_isAnyChecked ?? false)){
+    if (!isValid || !(_isAnyChecked ?? false)) {
       _isAnyChecked ??= false;
-      setState(() {
-        
-      });
+      setState(() {});
       return;
     }
     Navigator.of(context).pushNamed(DASHBOARD_SCREEN);
@@ -52,10 +54,37 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
     return null;
   }
 
+  String? _validatePayee(String? value){
+    if(value ==null){
+      return 'Please select payee';
+    }
+    return null;
+  }
+
+  String? _validateReason(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Reason is required';
+    }
+    return null;
+  }
+
   @override
   Widget build(BuildContext context) {
+    final List<DropdownMenuItem<String>> iconEntries =
+        <DropdownMenuItem<String>>[];
+
+    for (int i in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]) {
+      iconEntries.add(DropdownMenuItem<String>(
+        child: Text(i.toString()),
+        value: i.toString(),
+      ));
+    }
+
     return Scaffold(
-      appBar: MainAppBar(title: 'Add New Transaction',leading: BackIconButton(),),
+      appBar: MainAppBar(
+        title: 'Add New Transaction',
+        leading: BackIconButton(),
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -64,6 +93,31 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                DropdownButtonFormField(
+                  items: iconEntries,
+                  decoration: InputDecoration(
+                    labelText: 'Payee'
+                  ),
+                  onChanged: (value) {},
+                  onSaved: (newValue) {
+                    _payee = newValue;
+                  },
+                  validator: _validatePayee,
+                  isDense: true,
+                  isExpanded: true,
+                  menuMaxHeight: 300,
+                ),
+                SizedBox(height: 16.0),
+                TextFormField(
+                  decoration: InputDecoration(
+                    labelText: 'Reason',
+                  ),
+                  validator: _validatePrice,
+                  onSaved: (value) {
+                    _reason = value!;
+                  },
+                ),
+                SizedBox(height: 16.0),
                 TextFormField(
                   decoration: InputDecoration(
                     labelText: 'Price',
@@ -112,13 +166,17 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
                     print(p0);
                     _isAnyChecked = p0.isNotEmpty;
                     print(_isAnyChecked);
-                    setState(() {
-
-                    });
+                    setState(() {});
                   },
                 ),
-                if(_isAnyChecked == false)
-                  Text("Please select atleast one person" , style: TextStyle(color: Colors.red , fontSize: 16,),),
+                if (_isAnyChecked == false)
+                  Text(
+                    "Please select atleast one person",
+                    style: TextStyle(
+                      color: Colors.red,
+                      fontSize: 16,
+                    ),
+                  ),
                 SizedBox(height: 16.0),
                 RoundedPrimaryButton(
                   buttonText: 'Submit',

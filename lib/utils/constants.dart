@@ -10,5 +10,5 @@ const EXPENSES_LIST_SCREEN = "EXPENSES_LIST_SCREEN";
 const ADD_PERSON_SCREEN = "ADD_PERSON_SCREEN";
 const ADD_TRANSACTION_SCREEN = "ADD_TRANSACTION_SCREEN";
 
-// reimburse - have to pay
-//
+// reimburse - have to pay back
+// reclaims - have to get back
