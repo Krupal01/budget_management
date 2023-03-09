@@ -150,6 +150,10 @@ class User {
       claimprice: claimprice,
     );
   }
+
+  List<Participant?>? getParticipants(){
+    return participants?.where((element) => (element?.name != name && element?.mobile != mobile)).toList();
+  }
 }
 
 

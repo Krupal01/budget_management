@@ -7,7 +7,7 @@ part 'transaction_state.dart';
 
 class TransactionCubit extends Cubit<TransactionState> {
   final LocalService localService;
-  TransactionCubit({required this.localService}) : super(TransactionInitial());
+  TransactionCubit(this.localService) : super(TransactionInitial());
 
   Future<void> addTransaction(int userId , Transaction transaction) async {
     emit(TransactionLoading());

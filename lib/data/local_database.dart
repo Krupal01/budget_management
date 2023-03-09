@@ -104,52 +104,10 @@ class LocalDatabase {
       userid: 2,
       mobile: 2345678901,
       name: 'Jane Smith',
-      payprice: 200.0,
-      claimprice: 150.0,
-      participants: [
-        Participant(
-          participantid: 3,
-          name: 'Charlie',
-          mobile: 7654321098,
-          payprice: 80.0,
-          claimprice: 60.0,
-        ),
-        Participant(
-          participantid: 4,
-          name: 'David',
-          mobile: 6543210987,
-          payprice: 120.0,
-          claimprice: 90.0,
-        ),
-      ],
-      transactions: [
-        Transaction(
-          transactionid: 3,
-          payee: Payee(
-            name: 'Jane Smith',
-            mobile: 2345678901,
-          ),
-          reason: 'Breakfast',
-          price: 60.0,
-          date: "2019-07-19 8:40:23.000",
-          participants: [
-            Participant(
-              participantid: 3,
-              name: 'Charlie',
-              mobile: 7654321098,
-              payprice: 80.0,
-              claimprice: 60.0,
-            ),
-            Participant(
-              participantid: 4,
-              name: 'David',
-              mobile: 6543210987,
-              payprice: 120.0,
-              claimprice: 90.0,
-            ),
-          ],
-        ),
-      ],
+      payprice: null,
+      claimprice: null,
+      participants: null,
+      transactions: null,
     ),
   ];
 
@@ -179,10 +137,17 @@ class LocalDatabase {
     }
   }
 
-  static List<Participant?>? getParticipants(int userId) {
+  static List<Participant?>? getParticipantsWithUser(int userId) {
     User? user = getUserById(userId);
     if (user != null) {
       return user.participants;
+    }
+  }
+
+  static List<Participant?>? getParticipants(int userId){
+    User? user = getUserById(userId);
+    if (user != null) {
+      return user.participants?.where((element) => (element?.name != user.name && element?.mobile != user.mobile)).toList();
     }
   }
 
@@ -272,4 +237,5 @@ class LocalDatabase {
           (transaction) => transaction?.transactionid == transactionId);
     }
   }
+
 }

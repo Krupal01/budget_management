@@ -48,6 +48,12 @@ class LocalService {
         (throw NullThrownError());
   }
 
+  Future<List<Participant?>> getParticipantsWithUser(int userId) async {
+    await Future.delayed(Duration(seconds: 2));
+    return LocalDatabase.getParticipantsWithUser(userId) ??
+        (throw NullThrownError());
+  }
+
   Future<void> updateParticipant(int userId, Participant participant) async {
     await Future.delayed(Duration(seconds: 2));
     LocalDatabase.updateParticipant(userId, participant);

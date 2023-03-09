@@ -1,9 +1,10 @@
+import 'package:budget_management/data/local_service.dart';
 import 'package:budget_management/routes.dart';
 import 'package:budget_management/utils/constants.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp(routes: Routes(),));
+  runApp(MyApp(routes: Routes(LocalService()),));
 }
 
 class MyApp extends StatelessWidget {
