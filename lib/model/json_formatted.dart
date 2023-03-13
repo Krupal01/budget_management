@@ -25,6 +25,10 @@ class Participant {
     data['claim_price'] = claimprice;
     return data;
   }
+
+  bool hasTransaction(){
+    return (payprice != null || claimprice != null) && (payprice != 0 || claimprice != 0);
+  }
 }
 
 class Payee {

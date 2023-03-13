@@ -53,10 +53,11 @@ class Routes {
 
       case DASHBOARD_SCREEN:
         return MaterialPageRoute(
-          builder: (context) => BlocProvider.value(
-            value: userCubit,
-            child: DashboardScreen(),
-          ),
+          builder: (context) =>
+              BlocProvider.value(
+                value: userCubit,
+                child: DashboardScreen(),
+              ),
         );
       case PROFILE_SCREEN:
         return MaterialPageRoute(
@@ -72,11 +73,19 @@ class Routes {
         );
       case ADD_PERSON_SCREEN:
         return MaterialPageRoute(
-          builder: (context) => AddPersonScreen(),
+          builder: (context) =>
+              BlocProvider.value(
+                value: participantCubit,
+                child: AddPersonScreen(),
+              ),
         );
       case ADD_TRANSACTION_SCREEN:
         return MaterialPageRoute(
-          builder: (context) => AddTransactionScreen(),
+          builder: (context) =>
+              BlocProvider.value(
+                value: transactionCubit,
+                child: AddTransactionScreen(),
+              ),
         );
     }
     return null;

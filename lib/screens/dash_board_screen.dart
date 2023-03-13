@@ -10,9 +10,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../bloc/user_cubit.dart';
 import '../widget/person_card.dart';
 
-class DashboardScreen extends StatelessWidget {
+class DashboardScreen extends StatefulWidget {
   const DashboardScreen({Key? key}) : super(key: key);
 
+  @override
+  State<DashboardScreen> createState() => _DashboardScreenState();
+}
+
+class _DashboardScreenState extends State<DashboardScreen> {
   @override
   Widget build(BuildContext context) {
     BlocProvider.of<UserCubit>(context).getUser(1);
@@ -28,6 +33,7 @@ class DashboardScreen extends StatelessWidget {
                   child: CircularProgressIndicator(),
                 );
               } else if (state is UserGetSuccess) {
+                var participants = state.user.getParticipants()?.where((element) => element?.hasTransaction() ?? false).toList();
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -44,18 +50,18 @@ class DashboardScreen extends StatelessWidget {
                             Navigator.of(context).pushNamed(PROFILE_SCREEN),
                       ),
                     ),
-                    (state.user.getParticipants() == null ||
-                            (state.user.getParticipants()?.isEmpty ?? true))
+                    (participants == null ||
+                            (participants.isEmpty ?? true))
                         ? const Center(
                             child: Text("no participant available"),
                           )
                         : ListView.builder(
-                            itemCount: state.user.getParticipants()?.length,
+                            itemCount: participants.length,
                             shrinkWrap: true,
                             physics: const NeverScrollableScrollPhysics(),
                             itemBuilder: (context, index) {
                               var participant =
-                                  state.user.getParticipants()![index];
+                              participants[index];
                               return PersonCard(
                                 number: ((participant?.payprice ?? 0) -
                                     (participant?.claimprice ?? 0)),
@@ -94,13 +100,13 @@ class DashboardScreen extends StatelessWidget {
           ActionButton(
             icon: const Icon(Icons.add_comment_rounded),
             onPressed: () {
-              Navigator.of(context).pushNamed(ADD_TRANSACTION_SCREEN);
+              Navigator.of(context).pushNamed(ADD_TRANSACTION_SCREEN).then((value) => setState((){}));
             },
           ),
           ActionButton(
             icon: const Icon(Icons.add_reaction),
             onPressed: () {
-              Navigator.of(context).pushNamed(ADD_PERSON_SCREEN);
+              Navigator.of(context).pushNamed(ADD_PERSON_SCREEN).then((value) => setState((){}));
             },
           ),
         ],

@@ -133,6 +133,7 @@ class LocalDatabase {
   static void addParticipant(int userId, Participant participant) {
     User? user = getUserById(userId);
     if (user != null) {
+      participant.participantid = user.participants?.length ?? 0; // todo increase id of participates
       user.participants?.add(participant);
     }
   }
@@ -184,6 +185,7 @@ class LocalDatabase {
   static void addTransaction(int userId, Transaction transaction) {
     User? user = getUserById(userId);
     if (user != null) {
+      transaction.transactionid = user.transactions?.length ?? 0; // todo increase transaction id
       user.transactions?.add(transaction);
     }
   }
