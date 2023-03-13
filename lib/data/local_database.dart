@@ -9,13 +9,13 @@ class LocalDatabase {
       payprice: 100.0,
       claimprice: 50.0,
       participants: [
-        Participant(
+        /*Participant(
           participantid: 0,
           name: 'John Doe',
           mobile: 1234567890,
           payprice: 100.0,
           claimprice: 50.0,
-        ),
+        ),*/
         Participant(
           participantid: 1,
           name: 'Alice',
@@ -34,9 +34,12 @@ class LocalDatabase {
       transactions: [
         Transaction(
           transactionid: 1,
-          payee: Payee(
+          payee: Participant(
+            participantid: 0,
             name: 'John Doe',
             mobile: 1234567890,
+            payprice: 100.0,
+            claimprice: 50.0,
           ),
           reason: 'Lunch',
           price: 100.0,
@@ -67,9 +70,12 @@ class LocalDatabase {
         ),
         Transaction(
           transactionid: 2,
-          payee: Payee(
-            name: 'Alice',
-            mobile: 9876543210,
+          payee: Participant(
+            participantid: 0,
+            name: 'John Doe',
+            mobile: 1234567890,
+            payprice: 100.0,
+            claimprice: 50.0,
           ),
           reason: 'Dinner',
           price: 80.0,

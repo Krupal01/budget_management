@@ -15,8 +15,7 @@ class UserCubit extends Cubit<UserState> {
     emit(UserLoading());
 
     try {
-      localService.addUser(user);
-      emit(UserAddSuccess());
+      localService.addUser(user).then((value) => emit(UserAddSuccess()));
     } catch (e) {
       emit(UserError(e.toString()));
     }
@@ -26,8 +25,7 @@ class UserCubit extends Cubit<UserState> {
     emit(UserLoading());
 
     try {
-      localService.updateUser(user);
-      emit(UserUpdateSuccess());
+      localService.updateUser(user).then((value) => emit(UserUpdateSuccess()));
     } catch (e) {
       emit(UserError(e.toString()));
     }
@@ -37,8 +35,7 @@ class UserCubit extends Cubit<UserState> {
     emit(UserLoading());
 
     try {
-      localService.deleteUser(userId);
-      emit(UserDeleteSuccess());
+      localService.deleteUser(userId).then((value) => emit(UserDeleteSuccess()));
     } catch (e) {
       emit(UserError(e.toString()));
     }

@@ -15,8 +15,7 @@ class ParticipantCubit extends Cubit<ParticipantState> {
     emit(ParticipantLoading());
 
     try {
-      localService.addParticipant(userId, participant);
-      emit(ParticipantAddSuccess());
+      localService.addParticipant(userId, participant).then((value) => emit(ParticipantAddSuccess()));
     } catch (e) {
       emit(ParticipantError(e.toString()));
     }
@@ -26,8 +25,7 @@ class ParticipantCubit extends Cubit<ParticipantState> {
     emit(ParticipantLoading());
 
     try {
-      localService.updateParticipant(userId, participant);
-      emit(ParticipantUpdateSuccess());
+      localService.updateParticipant(userId, participant).then((value) => emit(ParticipantUpdateSuccess()));
     } catch (e) {
       emit(ParticipantError(e.toString()));
     }
@@ -37,8 +35,7 @@ class ParticipantCubit extends Cubit<ParticipantState> {
     emit(ParticipantLoading());
 
     try {
-      localService.deleteParticipant(userId, participantId);
-      emit(ParticipantDeleteSuccess());
+      localService.deleteParticipant(userId, participantId).then((value) => emit(ParticipantDeleteSuccess()));
     } catch (e) {
       emit(ParticipantError(e.toString()));
     }

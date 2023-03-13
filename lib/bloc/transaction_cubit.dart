@@ -12,8 +12,7 @@ class TransactionCubit extends Cubit<TransactionState> {
   Future<void> addTransaction(int userId , Transaction transaction) async {
     emit(TransactionLoading());
     try{
-      localService.addTransaction(userId, transaction);
-      emit(TransactionAddSuccess());
+      localService.addTransaction(userId, transaction).then((value) => emit(TransactionAddSuccess()));
     }catch(e){
       emit(TransactionError(e.toString()));
     }
@@ -22,8 +21,7 @@ class TransactionCubit extends Cubit<TransactionState> {
   Future<void> deleteTransaction(int userId , int transactionId) async {
     emit(TransactionLoading());
     try{
-      localService.deleteTransaction(userId, transactionId);
-      emit(TransactionDeleteSuccess());
+      localService.deleteTransaction(userId, transactionId).then((value) => emit(TransactionDeleteSuccess()));
     }catch(e){
       emit(TransactionError(e.toString()));
     }
@@ -32,8 +30,7 @@ class TransactionCubit extends Cubit<TransactionState> {
   Future<void> updateTransaction(int userId , Transaction transaction) async {
     emit(TransactionLoading());
     try{
-      localService.updateTransaction(userId, transaction);
-      emit(TransactionUpdateSuccess());
+      localService.updateTransaction(userId, transaction).then((value) => emit(TransactionUpdateSuccess()));
     }catch(e){
       emit(TransactionError(e.toString()));
     }

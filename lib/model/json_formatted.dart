@@ -1,4 +1,3 @@
-
 class Participant {
   int? participantid;
   String? name;
@@ -6,7 +5,12 @@ class Participant {
   double? payprice;
   double? claimprice;
 
-  Participant({this.participantid, this.name, this.mobile, this.payprice, this.claimprice});
+  Participant(
+      {this.participantid,
+      this.name,
+      this.mobile,
+      this.payprice,
+      this.claimprice});
 
   Participant.fromJson(Map<String, dynamic> json) {
     participantid = json['participant_id'];
@@ -26,29 +30,16 @@ class Participant {
     return data;
   }
 
-  bool hasTransaction(){
-    return (payprice != null || claimprice != null) && (payprice != 0 || claimprice != 0);
+  bool isNullOrEmpty() {
+    return (name == null || name!.isEmpty) || (mobile == null);
+  }
+
+  bool hasTransaction() {
+    return (payprice != null || claimprice != null) &&
+        (payprice != 0 || claimprice != 0);
   }
 }
 
-class Payee {
-  String? name;
-  int? mobile;
-
-  Payee({this.name, this.mobile});
-
-  Payee.fromJson(Map<String, dynamic> json) {
-    name = json['name'];
-    mobile = json['mobile'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['name'] = name;
-    data['mobile'] = mobile;
-    return data;
-  }
-}
 
 class Root {
   User? user;
@@ -68,17 +59,23 @@ class Root {
 
 class Transaction {
   int? transactionid;
-  Payee? payee;
+  Participant? payee;
   String? reason;
   double? price;
   String? date;
   List<Participant?>? participants;
 
-  Transaction({this.transactionid, this.payee, this.reason, this.price, this.date, this.participants});
+  Transaction(
+      {this.transactionid,
+      this.payee,
+      this.reason,
+      this.price,
+      this.date,
+      this.participants});
 
   Transaction.fromJson(Map<String, dynamic> json) {
     transactionid = json['transaction_id'];
-    payee = json['payee'] != null ? Payee?.fromJson(json['payee']) : null;
+    payee = json['payee'] != null ? Participant?.fromJson(json['payee']) : null;
     reason = json['reason'];
     price = json['price'];
     date = json['date'];
@@ -97,7 +94,9 @@ class Transaction {
     data['reason'] = reason;
     data['price'] = price;
     data['date'] = date;
-    data['participants'] =participants != null ? participants!.map((v) => v?.toJson()).toList() : null;
+    data['participants'] = participants != null
+        ? participants!.map((v) => v?.toJson()).toList()
+        : null;
     return data;
   }
 }
@@ -111,7 +110,14 @@ class User {
   List<Participant?>? participants;
   List<Transaction?>? transactions;
 
-  User({this.userid, this.mobile, this.name, this.payprice, this.claimprice, this.participants, this.transactions});
+  User(
+      {this.userid,
+      this.mobile,
+      this.name,
+      this.payprice,
+      this.claimprice,
+      this.participants,
+      this.transactions});
 
   User.fromJson(Map<String, dynamic> json) {
     userid = json['user_id'];
@@ -140,12 +146,16 @@ class User {
     data['name'] = name;
     data['pay_price'] = payprice;
     data['claim_price'] = claimprice;
-    data['participants'] =participants != null ? participants!.map((v) => v?.toJson()).toList() : null;
-    data['transactions'] =transactions != null ? transactions!.map((v) => v?.toJson()).toList() : null;
+    data['participants'] = participants != null
+        ? participants!.map((v) => v?.toJson()).toList()
+        : null;
+    data['transactions'] = transactions != null
+        ? transactions!.map((v) => v?.toJson()).toList()
+        : null;
     return data;
   }
 
-  Participant getUserAsParticipant(){
+  Participant getUserAsParticipant() {
     return Participant(
       participantid: 0,
       name: name,
@@ -155,14 +165,19 @@ class User {
     );
   }
 
-  List<Participant?>? getParticipants(){
-    return participants?.where((element) => (element?.name != name && element?.mobile != mobile)).toList();
+  List<Participant?>? getParticipants() {
+    return participants
+        ?.where(
+            (element) => (element?.name != name && element?.mobile != mobile))
+        .toList();
+  }
+
+  List<Participant?>? getParticipantsWithUser() {
+    List<Participant?>? result = [];
+
+    result.add(getUserAsParticipant());
+    result.addAll(participants ?? []);
+
+    return result;
   }
 }
-
-
-
-
-
-
-
