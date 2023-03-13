@@ -1,3 +1,4 @@
+import 'package:budget_management/model/json_formatted.dart';
 import 'package:budget_management/utils/constants.dart';
 import 'package:budget_management/widget/back_icon_button.dart';
 import 'package:budget_management/widget/main_app_bar.dart';
@@ -5,6 +6,7 @@ import 'package:budget_management/widget/main_dashboard_card.dart';
 import 'package:budget_management/widget/profile_menu_card.dart';
 import 'package:flutter/material.dart';
 
+import '../routes.dart';
 import '../widget/person_details_card.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -39,13 +41,13 @@ class ProfileScreen extends StatelessWidget {
                   mainAxisSpacing: 16,
                   childAspectRatio: 2,
                 ),
-                itemCount: 10,
+                itemCount: ProfileTabs.values.length,
                 itemBuilder: (BuildContext context, int index) {
                   return ProfileMenuCard(
-                    title: "250",
-                    subtitle: "total transaction",
-                    onTap: () =>
-                        Navigator.of(context).pushNamed(EXPENSES_LIST_SCREEN),
+                    profileTab : ProfileTabs.values[index],
+                    onTap: (p0){
+                      Routes.profile_navigator(p0); //todo : no screen to navigate for now
+                    },
                   );
                 },
               ),

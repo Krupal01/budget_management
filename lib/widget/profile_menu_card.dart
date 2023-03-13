@@ -1,17 +1,19 @@
+import 'package:budget_management/model/json_formatted.dart';
 import 'package:budget_management/utils/styles.dart';
 import 'package:flutter/material.dart';
 
 class ProfileMenuCard extends StatelessWidget {
-  final String title;
-  final String subtitle;
-  final VoidCallback? onTap;
+  final ProfileTabs profileTab;
+  final Function(ProfileTabs)? onTap;
 
-  ProfileMenuCard({required this.title, required this.subtitle , this.onTap});
+  ProfileMenuCard({required this.profileTab, this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: onTap,
+      onTap: () {
+        if (onTap != null) onTap!(profileTab);
+      },
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15.0),
@@ -22,16 +24,16 @@ class ProfileMenuCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                title,
-                style: primaryTextStyles['28_bold'],
+              Icon(
+                profileTab.icon,
+                color: Theme.of(context).primaryColor,
+              ),
+              SizedBox(
+                height: 10,
               ),
               Text(
-                subtitle,
-                style: TextStyle(
-                  fontSize: 16.0,
-                  color : Colors.grey
-                ),
+                profileTab.title,
+                style: TextStyle(fontSize: 16.0, color: Colors.grey),
               ),
             ],
           ),

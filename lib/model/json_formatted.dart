@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class Participant {
   int? participantid;
   String? name;
@@ -181,3 +183,21 @@ class User {
     return result;
   }
 }
+
+enum ProfileTabs{
+
+  total_transaction(title : 'Total Transaction' , icon : Icons.add_chart),
+  total_participants(title : 'Total Participants' , icon : Icons.people),
+  total_pay(title : 'Total Pay' , icon: Icons.payment_sharp),
+  total_claims(title : 'Total Claims', icon: Icons.add_card_sharp),
+  forgot_password(title : 'Forgot Password' , icon : Icons.password_sharp),
+  update_profile(title : 'Update profile' , icon : Icons.account_circle_sharp),
+  monthly_statement(title : 'Monthly Statement' , icon : Icons.list_alt_sharp),
+  reset_month(title : 'Reset Month' , icon : Icons.edit_calendar_sharp);
+
+  const ProfileTabs({required this.title,  required this.icon}) ;
+  final String title;
+  final IconData icon;
+}
+
+

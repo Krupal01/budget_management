@@ -1,4 +1,5 @@
 import 'package:budget_management/data/local_service.dart';
+import 'package:budget_management/model/json_formatted.dart';
 import 'package:budget_management/screens/add_person_screen.dart';
 import 'package:budget_management/screens/add_transaction_screen.dart';
 import 'package:budget_management/screens/dash_board_screen.dart';
@@ -89,5 +90,26 @@ class Routes {
         );
     }
     return null;
+  }
+
+  static void profile_navigator(ProfileTabs profileTabs){ // todo : add screens to navigate
+    switch(profileTabs){
+      case ProfileTabs.total_claims :
+        break;
+      case ProfileTabs.total_participants :
+        break;
+      case ProfileTabs.total_pay :
+        break;
+      case ProfileTabs.total_transaction :
+        break;
+      case ProfileTabs.forgot_password :
+        break;
+      case ProfileTabs.update_profile :
+        break;
+      case ProfileTabs.monthly_statement :
+        break;
+      case ProfileTabs.reset_month :
+        break;
+    }
   }
 }
