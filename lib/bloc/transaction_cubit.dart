@@ -44,4 +44,14 @@ class TransactionCubit extends Cubit<TransactionState> {
       emit(TransactionError(e.toString()));
     }
   }
+
+  Future<void> getTransactionByParticipates(int userId , Participant participant) async {
+    emit(TransactionLoading());
+    try{
+      localService.getTransactionByParticipate(userId, participant).then((value) => emit(TransactionListGetSuccess(value)));
+    }catch(e){
+      emit(TransactionError(e.toString()));
+    }
+  }
+
 }

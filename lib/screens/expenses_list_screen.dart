@@ -20,7 +20,7 @@ class ExpensesListScreen extends StatelessWidget {
           itemBuilder: (context, index) => TransactionCard(
             price: 100,
             reason: "reason",
-            dateInMillis: 1642454545,
+            date: "2019-07-19 8:40:23.000",
           ),
         ),
       ),

@@ -40,6 +40,10 @@ class Participant {
     return (payprice != null || claimprice != null) &&
         (payprice != 0 || claimprice != 0);
   }
+
+  bool isEqualTo(Participant participant){
+    return (name==participant.name) && (mobile == participant.mobile);
+  }
 }
 
 

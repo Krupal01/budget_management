@@ -24,3 +24,9 @@ class TransactionGetSuccess extends TransactionState {
 
   TransactionGetSuccess(this.transaction);
 }
+
+class TransactionListGetSuccess extends TransactionState {
+  final List<Transaction?>? transactions;
+
+  TransactionListGetSuccess(this.transactions);
+}

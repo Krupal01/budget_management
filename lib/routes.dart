@@ -67,8 +67,15 @@ class Routes {
           ),
         );
       case PERSON_DETAIL_SCREEN:
+        int participantId = settings.arguments as int;
         return MaterialPageRoute(
-          builder: (context) => PersonDetailScreen(),
+          builder: (context) => MultiBlocProvider(
+            providers: [
+              BlocProvider.value(value: participantCubit),
+              BlocProvider.value(value: transactionCubit),
+            ],
+            child: PersonDetailScreen(participantId: participantId,),
+          ),
         );
       case EXPENSES_LIST_SCREEN:
         return MaterialPageRoute(

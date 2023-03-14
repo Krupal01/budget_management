@@ -68,8 +68,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                 name: participant?.name ?? "null",
                                 redNumber: participant?.payprice ?? 0,
                                 greenNumber: participant?.claimprice ?? 0,
-                                onTap: () => Navigator.of(context)
-                                    .pushNamed(PERSON_DETAIL_SCREEN),
+                                onTap: () {
+                                  if(participant!=null && participant.participantid!=null && participant.participantid !=0) {
+                                    Navigator.of(context)
+                                      .pushNamed(PERSON_DETAIL_SCREEN
+                                       , arguments: participant.participantid);
+                                  }}
                               );
                             },
                           ),

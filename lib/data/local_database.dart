@@ -139,7 +139,8 @@ class LocalDatabase {
   static void addParticipant(int userId, Participant participant) {
     User? user = getUserById(userId);
     if (user != null) {
-      participant.participantid = user.participants?.length ?? 0; // todo increase id of participates
+      participant.participantid =
+          user.participants?.length ?? 0; // todo increase id of participates
       user.participants?.add(participant);
     }
   }
@@ -151,10 +152,13 @@ class LocalDatabase {
     }
   }
 
-  static List<Participant?>? getParticipants(int userId){
+  static List<Participant?>? getParticipants(int userId) {
     User? user = getUserById(userId);
     if (user != null) {
-      return user.participants?.where((element) => (element?.name != user.name && element?.mobile != user.mobile)).toList();
+      return user.participants
+          ?.where((element) =>
+              (element?.name != user.name && element?.mobile != user.mobile))
+          .toList();
     }
   }
 
@@ -191,7 +195,8 @@ class LocalDatabase {
   static void addTransaction(int userId, Transaction transaction) {
     User? user = getUserById(userId);
     if (user != null) {
-      transaction.transactionid = user.transactions?.length ?? 0; // todo increase transaction id
+      transaction.transactionid =
+          user.transactions?.length ?? 0; // todo increase transaction id
       user.transactions?.add(transaction);
     }
   }
@@ -218,10 +223,13 @@ class LocalDatabase {
       int userId, Participant participant) {
     User? user = getUserById(userId);
     if (user != null) {
-      return user.transactions
-          ?.where((element) =>
-              element?.participants?.contains(participant) ?? false)
-          .toList();
+      return user.transactions?.where((element) {
+        return element?.participants?.firstWhere(
+                    (element) => element?.isEqualTo(participant) ?? false,
+                    orElse: () => null,) != null
+            ? true
+            : false;
+      }).toList();
     }
     return null;
   }
@@ -245,5 +253,4 @@ class LocalDatabase {
           (transaction) => transaction?.transactionid == transactionId);
     }
   }
-
 }

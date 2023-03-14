@@ -10,5 +10,8 @@ const EXPENSES_LIST_SCREEN = "EXPENSES_LIST_SCREEN";
 const ADD_PERSON_SCREEN = "ADD_PERSON_SCREEN";
 const ADD_TRANSACTION_SCREEN = "ADD_TRANSACTION_SCREEN";
 
+const PARTICIPANT_ID = 'PARTICIPANT_ID';
+const USER_ID = 'USER_ID';
+
 // reimburse - have to pay back
 // reclaims - have to get back

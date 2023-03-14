@@ -77,6 +77,7 @@ class _AddTransactionScreenState extends State<AddTransactionScreen> {
     if (picked != null && picked != _selectedDate) {
       setState(() {
         _selectedDate = picked;
+        print('selected date$_selectedDate}');
         _dateController.text = '${_selectedDate?.day}/${_selectedDate?.month}/${_selectedDate?.year}';
       });
     }

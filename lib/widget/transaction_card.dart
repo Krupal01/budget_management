@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../utils/styles.dart';
 
 class TransactionCard extends StatelessWidget {
 
-  final double price;
-  final String reason;
-  final int dateInMillis;
+  final double? price;
+  final String? reason;
+  final String? date;
   final VoidCallback? onTap;
   final VoidCallback? onLongPress;
 
-  const TransactionCard({Key? key , required this.price, required this.reason, required this.dateInMillis , this.onTap , this.onLongPress}) : super(key: key);
+  const TransactionCard({Key? key ,  this.price,  this.reason,  this.date , this.onTap , this.onLongPress}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -39,9 +40,9 @@ class TransactionCard extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.all(5.0),
                       child: Text(
-                        price.toStringAsFixed(2),
+                        (price??0).toStringAsFixed(2),
                         style: TextStyle(
-                          color: price < 0 ? Colors.red : Colors.green,
+                          color: (price??0) < 0 ? Colors.red : Colors.green,
                           fontSize: 20.0,
                         ),
                       ),
@@ -56,12 +57,12 @@ class TransactionCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      reason,
+                      reason??"",
                       style: blackTextStyles['18_normal'],
                     ),
                     SizedBox(height: 5.0),
                     Text(
-                      DateTime.fromMillisecondsSinceEpoch(dateInMillis).toString(),
+                      date!=null ? DateFormat('yyyy-mm-dd hh:mm:ss.000').parse(date!).toString().split(' ')[0] : '', // todo , splitting to show date only
                       style: TextStyle(fontSize: 12 , color: Colors.grey),
                     ),
                   ],
