@@ -29,7 +29,7 @@ class ProfileMenuCard extends StatelessWidget {
                 color: Theme.of(context).primaryColor,
               ),
               SizedBox(
-                height: 10,
+                height: 5,
               ),
               Text(
                 profileTab.title,

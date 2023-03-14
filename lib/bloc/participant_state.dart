@@ -18,3 +18,8 @@ class ParticipantGetSuccess extends ParticipantState {
   final Participant participant;
   ParticipantGetSuccess(this.participant);
 }
+class ParticipantListGetSuccess extends ParticipantState {
+  final List<Participant?> participants;
+  ParticipantListGetSuccess(this.participants);
+}
+

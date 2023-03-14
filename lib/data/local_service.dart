@@ -100,4 +100,17 @@ class LocalService {
         (throw NullThrownError());
   }
 
+  Future<List<Transaction?>> getPaysTransaction(int userId) async {
+    await Future.delayed(Duration(seconds: 2));
+    return LocalDatabase.getPayTransactions(userId) ??
+        (throw NullThrownError());
+  }
+
+  Future<List<Transaction?>> getClaimsTransaction(int userId) async {
+    await Future.delayed(Duration(seconds: 2));
+    return LocalDatabase.getClaimsTransactions(userId) ??
+        (throw NullThrownError());
+  }
+
+
 }

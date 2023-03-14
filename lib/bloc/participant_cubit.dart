@@ -52,4 +52,16 @@ class ParticipantCubit extends Cubit<ParticipantState> {
       emit(ParticipantError(e.toString()));
     }
   }
+
+  Future<void> getParticipants(int userId) async {
+    emit(ParticipantLoading());
+
+    try {
+      localService
+          .getParticipants(userId)
+          .then((value) => emit(ParticipantListGetSuccess(value)));
+    } catch (e) {
+      emit(ParticipantError(e.toString()));
+    }
+  }
 }

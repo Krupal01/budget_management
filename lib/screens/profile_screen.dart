@@ -73,7 +73,7 @@ class ProfileScreen extends StatelessWidget {
                   return ProfileMenuCard(
                     profileTab : ProfileTabs.values[index],
                     onTap: (p0){
-                      Routes.profile_navigator(p0); //todo : no screen to navigate for now
+                      Routes.profile_navigator(context , p0); //todo : no screen to navigate for now
                     },
                   );
                 },

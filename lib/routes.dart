@@ -74,12 +74,24 @@ class Routes {
               BlocProvider.value(value: participantCubit),
               BlocProvider.value(value: transactionCubit),
             ],
-            child: PersonDetailScreen(participantId: participantId,),
+            child: PersonDetailScreen(
+              participantId: participantId,
+            ),
           ),
         );
       case EXPENSES_LIST_SCREEN:
+        ProfileTabs profileTabs = settings.arguments as ProfileTabs;
         return MaterialPageRoute(
-          builder: (context) => ExpensesListScreen(),
+          builder: (context) => MultiBlocProvider(
+            providers: [
+              BlocProvider.value(value: transactionCubit),
+              BlocProvider.value(value: userCubit),
+              BlocProvider.value(value: participantCubit),
+            ],
+            child: ExpensesListScreen(
+              profileTabs: profileTabs,
+            ),
+          ),
         );
       case ADD_PERSON_SCREEN:
         return MaterialPageRoute(
@@ -102,18 +114,23 @@ class Routes {
     return null;
   }
 
-  static void profile_navigator(ProfileTabs profileTabs) {
+  static void profile_navigator(BuildContext context , ProfileTabs profileTabs) {
     // todo : add screens to navigate
     switch (profileTabs) {
       case ProfileTabs.total_claims:
+        Navigator.of(context).pushNamed(EXPENSES_LIST_SCREEN , arguments: profileTabs);
         break;
       case ProfileTabs.total_participants:
+        Navigator.of(context).pushNamed(EXPENSES_LIST_SCREEN , arguments: profileTabs);
         break;
       case ProfileTabs.total_pay:
+        Navigator.of(context).pushNamed(EXPENSES_LIST_SCREEN , arguments: profileTabs);
         break;
       case ProfileTabs.total_transaction:
+        Navigator.of(context).pushNamed(EXPENSES_LIST_SCREEN , arguments: profileTabs);
         break;
       case ProfileTabs.forgot_password:
+        Navigator.of(context).pushNamed(FORGOT_PASSWORD_SCREEN);
         break;
       case ProfileTabs.update_profile:
         break;

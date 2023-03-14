@@ -104,6 +104,42 @@ class LocalDatabase {
             ),
           ],
         ),
+        Transaction(
+          transactionid: 3,
+          payee: Participant(
+            participantid: 1,
+            name: 'Alice',
+            mobile: 9876543210,
+            payprice: 60.0,
+            claimprice: 30.0,
+          ),
+          reason: 'Dinner',
+          price: 80.0,
+          date: "2019-07-19 8:40:23.000",
+          participants: [
+            Participant(
+              participantid: 0,
+              name: 'John Doe',
+              mobile: 1234567890,
+              payprice: 100.0,
+              claimprice: 50.0,
+            ),
+            Participant(
+              participantid: 1,
+              name: 'Alice',
+              mobile: 9876543210,
+              payprice: 60.0,
+              claimprice: 30.0,
+            ),
+            Participant(
+              participantid: 2,
+              name: 'Bob',
+              mobile: 8765432109,
+              payprice: 40.0,
+              claimprice: 20.0,
+            ),
+          ],
+        ),
       ],
     ),
     User(
@@ -225,8 +261,10 @@ class LocalDatabase {
     if (user != null) {
       return user.transactions?.where((element) {
         return element?.participants?.firstWhere(
-                    (element) => element?.isEqualTo(participant) ?? false,
-                    orElse: () => null,) != null
+                  (element) => element?.isEqualTo(participant) ?? false,
+                  orElse: () => null,
+                ) !=
+                null
             ? true
             : false;
       }).toList();
@@ -252,5 +290,28 @@ class LocalDatabase {
       user.transactions?.removeWhere(
           (transaction) => transaction?.transactionid == transactionId);
     }
+  }
+
+  static List<Transaction?>? getPayTransactions(int userId) {
+    User? user = getUserById(userId);
+    if (user != null) {
+      return user.transactions
+          ?.where((element) =>
+              !(element?.payee?.isEqualTo(user.getUserAsParticipant()) ??
+                  false))
+          .toList();
+    }
+    return null;
+  }
+
+  static List<Transaction?>? getClaimsTransactions(int userId) {
+    User? user = getUserById(userId);
+    if (user != null) {
+      return user.transactions
+          ?.where((element) =>
+              element?.payee?.isEqualTo(user.getUserAsParticipant()) ?? false)
+          .toList();
+    }
+    return null;
   }
 }
