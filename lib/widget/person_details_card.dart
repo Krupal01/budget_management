@@ -4,7 +4,13 @@ import '../utils/styles.dart';
 
 class PersonDetailsCard extends StatelessWidget {
   // final int userId;
-  const PersonDetailsCard({Key? key}) : super(key: key);
+  final String? title;
+  final String? description;
+  final double? price;
+  final double? payPrice;
+  final double? claimPrice;
+
+  const PersonDetailsCard({Key? key, this.title, this.description, this.price, this.payPrice, this.claimPrice}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,18 +34,18 @@ class PersonDetailsCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "title",
+                      title??"",
                       style: whiteTextStyles['30_bold'],
                     ),
                     SizedBox(height: 2.0),
                     Text(
-                      "description",
+                      description??"",
                       style: whiteTextStyles['18_normal'],
                     ),
                   ],
                 ),
                 Text(
-                  (250.0525).toStringAsFixed(2),
+                  (price??0).toStringAsFixed(2),
                   style: whiteTextStyles['40_bold'],
                 ),
               ],
@@ -58,12 +64,12 @@ class PersonDetailsCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      (250.0525).toStringAsFixed(2),
+                      (payPrice??0).toStringAsFixed(2),
                       style: TextStyle(fontSize: 22 , color: Colors.green),
                     ),
                     SizedBox(height: 2.0),
                     Text(
-                      (-250.0525).toStringAsFixed(2),
+                      (claimPrice??0).toStringAsFixed(2),
                       style: TextStyle(fontSize: 22 , color: Colors.red),
                     ),
                   ],

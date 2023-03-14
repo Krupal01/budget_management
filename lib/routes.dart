@@ -61,7 +61,10 @@ class Routes {
         );
       case PROFILE_SCREEN:
         return MaterialPageRoute(
-          builder: (context) => ProfileScreen(),
+          builder: (context) => BlocProvider.value(
+            value: userCubit,
+            child: ProfileScreen(),
+          ),
         );
       case PERSON_DETAIL_SCREEN:
         return MaterialPageRoute(
@@ -92,23 +95,24 @@ class Routes {
     return null;
   }
 
-  static void profile_navigator(ProfileTabs profileTabs){ // todo : add screens to navigate
-    switch(profileTabs){
-      case ProfileTabs.total_claims :
+  static void profile_navigator(ProfileTabs profileTabs) {
+    // todo : add screens to navigate
+    switch (profileTabs) {
+      case ProfileTabs.total_claims:
         break;
-      case ProfileTabs.total_participants :
+      case ProfileTabs.total_participants:
         break;
-      case ProfileTabs.total_pay :
+      case ProfileTabs.total_pay:
         break;
-      case ProfileTabs.total_transaction :
+      case ProfileTabs.total_transaction:
         break;
-      case ProfileTabs.forgot_password :
+      case ProfileTabs.forgot_password:
         break;
-      case ProfileTabs.update_profile :
+      case ProfileTabs.update_profile:
         break;
-      case ProfileTabs.monthly_statement :
+      case ProfileTabs.monthly_statement:
         break;
-      case ProfileTabs.reset_month :
+      case ProfileTabs.reset_month:
         break;
     }
   }

@@ -82,3 +82,5 @@ Map<String, TextStyle> primaryTextStyles = {
   '34_normal': TextStyle(fontSize: 34, color: Colors.deepOrange, fontWeight: FontWeight.normal),
   '34_bold': TextStyle(fontSize: 34, color: Colors.deepOrange, fontWeight: FontWeight.bold),
 };
+
+TextStyle errorText = TextStyle(color:  Colors.red , fontSize: 16);

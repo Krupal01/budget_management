@@ -1,10 +1,13 @@
+import 'package:budget_management/bloc/user_cubit.dart';
 import 'package:budget_management/model/json_formatted.dart';
 import 'package:budget_management/utils/constants.dart';
+import 'package:budget_management/utils/styles.dart';
 import 'package:budget_management/widget/back_icon_button.dart';
 import 'package:budget_management/widget/main_app_bar.dart';
 import 'package:budget_management/widget/main_dashboard_card.dart';
 import 'package:budget_management/widget/profile_menu_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../routes.dart';
 import '../widget/person_details_card.dart';
@@ -14,6 +17,7 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    BlocProvider.of<UserCubit>(context).getUser(1);
     return Scaffold(
       appBar: MainAppBar(
         title: "Profile",
@@ -24,10 +28,33 @@ class ProfileScreen extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
-              SizedBox(
-                width: double.infinity,
-                height: 150,
-                child: PersonDetailsCard(),
+              BlocBuilder<UserCubit,UserState>(
+                builder: (context, state) {
+                  if(state is UserGetSuccess){
+                    var user = state.user;
+                    return SizedBox(
+                      width: double.infinity,
+                      height: 150,
+                      child: PersonDetailsCard(
+                        title: user.name,
+                        description: user.mobile.toString(),
+                        price: (user.payprice??0)+(user.claimprice??0),
+                        payPrice: user.payprice,
+                        claimPrice: user.claimprice,
+                      ),
+                    );
+                  }
+                  else if(state is UserLoading){
+                    return CircularProgressIndicator();
+                  }
+                  else if(state is UserError){
+                    return Text('Something wrong' , style: errorText,);
+                  }
+                  else {
+                    return SizedBox(width: double.infinity,
+                      height: 150,child: PersonDetailsCard(),);
+                  }
+                },
               ),
               SizedBox(
                 height: 16,
