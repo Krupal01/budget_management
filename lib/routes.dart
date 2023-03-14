@@ -130,7 +130,7 @@ class Routes {
         Navigator.of(context).pushNamed(EXPENSES_LIST_SCREEN , arguments: profileTabs);
         break;
       case ProfileTabs.forgot_password:
-        Navigator.of(context).pushNamed(FORGOT_PASSWORD_SCREEN);
+        Navigator.of(context).pushNamed(MOBILE_VERIFICATION_SCREEN);
         break;
       case ProfileTabs.update_profile:
         break;
