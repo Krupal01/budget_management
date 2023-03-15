@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.deepOrange
+        primarySwatch: Colors.deepOrange,
       ),
       initialRoute: SPLASH_SCREEN,
       onGenerateRoute: (settings) => routes.onGenerateRoutes(settings),
